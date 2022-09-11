@@ -26,6 +26,7 @@
 .theme-dark .blockedPaymentsWarning-T43O2z {
 	background-color: var(--background-primary);
 }
+
 .theme-dark .backgroundOptionInner-SSz19O {
 	background-color: var(--input-background);
 }
@@ -62,12 +63,25 @@
 	background-color: var(--background-secondary-alt);
 }
 
+.theme-dark .optionPillKey-2JyeoP {
+	background-color: rgb(35, 36, 39);
+}
+
 .theme-dark .tierBody-1d3UiS, .theme-dark .autocomplete-3NRXG8, .theme-dark .categoryHeader-OpJ1Ly {
 	background-color: var(--background-secondary);
 }
 
 .theme-dark .headerClickable-zGQJz3, .theme-dark .headerExpanded-1-zwDr, .theme-dark .headerDefault-1e6yjj {
 	background-color: #00000026;
+}
+
+.theme-dark .optionPill-2kmuZR {
+	background-color: rgb(41, 43, 55);
+	border-color: var(--background-tertiary);
+}
+
+.theme-dark .optionPillKey-2JyeoP {
+	background-color: rgb(32, 34, 43);
 }
 
 .theme-dark .changeDetails-1kMZqI {
@@ -114,7 +128,7 @@
 	--background-secondary-alt: rgb(21, 22, 26);
 	--background-tertiary: rgb(18, 19, 20);
 	--background-accent: rgb(65, 66, 70);
-	--background-floating: rgb(35, 36, 39);
+	--background-floating: rgb(21, 22, 26);
 	--color-shadow-key: rgba(0, 0, 0, 0.6);
 	--input-background: rgb(22, 23, 26);
 	--channeltextarea-background: rgb(21, 22, 24);
