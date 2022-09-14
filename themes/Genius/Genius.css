@@ -9,6 +9,33 @@
 	transition: opacity .25s ease-in-out, width .25s ease-in-out;
 }
 
+.theme-dark .button-y6hemj:after {
+	content: "";
+	position: fixed;
+	display: block;
+	background-image: url('/assets/879468637365983eba26983ddf6d38ad.svg');
+	width: 48px;
+	height: 0;
+	bottom: 68px;
+	background-size: 48px;
+	transition: height .3s ease-in;
+}
+
+.theme-dark .button-y6hemj:hover:after
+{
+	height: 28px;
+}
+
+.theme-dark .chatContent-3KubbW[aria-label=" (канал)"] .button-y6hemj:after
+{
+	right: 40px;
+}
+
+.theme-dark .chatContent-3KubbW:not([aria-label=" (канал)"]) .button-y6hemj:after
+{
+	right: 280px;
+}
+
 .theme-dark .containerDefault-YUSmu3.selected-2TbFuo .iconItem-1EjiK0,
 .theme-dark .iconVisibility-vptxma:focus-within .iconItem-1EjiK0,
 .theme-dark .iconVisibility-vptxma:focus .iconItem-1EjiK0,
