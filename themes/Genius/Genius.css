@@ -26,12 +26,13 @@
 	height: 28px;
 }
 
-.theme-dark .chatContent-3KubbW[aria-label=" (канал)"] .activeButtonChild-2hgLAO:after
+.theme-dark .chatContent-3KubbW[aria-label=" (канал)"] .activeButtonChild-2hgLAO:after,
+.theme-dark .chatContent-3KubbW[aria-label="Текстовый чат в голосовом канале чат"] .activeButtonChild-2hgLAO:after
 {
 	right: 40px;
 }
 
-.theme-dark .chatContent-3KubbW:not([aria-label=" (канал)"]) .activeButtonChild-2hgLAO:after
+.theme-dark .chatContent-3KubbW:not([aria-label=" (канал)"]):not([aria-label="Текстовый чат в голосовом канале чат"]) .activeButtonChild-2hgLAO:after
 {
 	right: 280px;
 }
