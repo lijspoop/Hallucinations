@@ -106,6 +106,10 @@
 	background-color: #ffffff05;
 }
 
+.theme-dark .item-2OyinQ {
+    border-color: hsl(240deg, 8%, 8%);
+}
+
 .theme-dark .auto-2K3UW5::-webkit-scrollbar-thumb, 
 .theme-dark .auto-2K3UW5::-webkit-scrollbar-track {
 	border: 5px solid var(--background-primary);
