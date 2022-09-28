@@ -13,28 +13,18 @@
 	content: "";
 	position: fixed;
 	display: block;
-	background-image: url('https://discord.com/assets/879468637365983eba26983ddf6d38ad.svg');
+	background-image: url(https://discord.com/assets/8794686….svg);
 	width: 48px;
-	height: 0;
-	bottom: 68px;
+	height: 28px;
+	opacity: 0;
+	transform: translateY(-62px) translateX(-66px);
 	background-size: 48px;
-	transition: height .3s ease-in;
+	transition: opacity .3s cubic-bezier(0.4, 0, 1, 1);
 }
 
 .theme-dark .button-y6hemj:hover .activeButtonChild-2hgLAO:after
 {
-	height: 28px;
-}
-
-.theme-dark .chatContent-3KubbW[aria-label=" (канал)"] .activeButtonChild-2hgLAO:after,
-.theme-dark .chatContent-3KubbW[aria-label="Текстовый чат в голосовом канале чат"] .activeButtonChild-2hgLAO:after
-{
-	right: 40px;
-}
-
-.theme-dark .chatContent-3KubbW:not([aria-label=" (канал)"]):not([aria-label="Текстовый чат в голосовом канале чат"]) .activeButtonChild-2hgLAO:after
-{
-	right: 280px;
+	opacity: 1;
 }
 
 .theme-dark .containerDefault-YUSmu3.selected-2TbFuo .iconItem-1EjiK0,
