@@ -13,7 +13,7 @@
 	content: "";
 	position: fixed;
 	display: block;
-	background-image: url(https://discord.com/assets/8794686….svg);
+	background-image: url('https://discord.com/assets/879468637365983eba26983ddf6d38ad.svg');
 	width: 48px;
 	height: 28px;
 	opacity: 0;
@@ -107,7 +107,7 @@
 }
 
 .theme-dark .item-2OyinQ {
-    border-color: hsl(240deg, 8%, 8%);
+	border-color: hsl(240deg, 8%, 8%);
 }
 
 .theme-dark .auto-2K3UW5::-webkit-scrollbar-thumb, 
