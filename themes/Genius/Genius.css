@@ -17,7 +17,7 @@
 	width: 48px;
 	height: 28px;
 	opacity: 0;
-	transform: translateY(-62px) translateX(-66px);
+	transform: translateY(-36px) translateX(-66px);
 	background-size: 48px;
 	transition: opacity .3s cubic-bezier(0.4, 0, 1, 1);
 }
