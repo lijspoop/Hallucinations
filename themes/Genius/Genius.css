@@ -27,6 +27,17 @@
 	opacity: 1;
 }
 
+.theme-dark .banner-1YaD3N.popoutBanner-3cqRD9.reducedMotion-395crG:hover .pencilContainer-18TrEJ,
+.theme-dark .banner-1YaD3N.profileBanner-1owKI5.reducedMotion-395crG:hover .pencilContainer-18TrEJ {
+    opacity: 1;
+}
+
+.theme-dark .banner-1YaD3N.popoutBanner-3cqRD9.reducedMotion-395crG .pencilContainer-18TrEJ,
+.theme-dark .banner-1YaD3N.profileBanner-1owKI5.reducedMotion-395crG .pencilContainer-18TrEJ {
+    opacity: 0;
+    transition: opacity .15s ease-in;
+}
+
 .theme-dark .containerDefault-YUSmu3.selected-2TbFuo .iconItem-1EjiK0,
 .theme-dark .iconVisibility-vptxma:focus-within .iconItem-1EjiK0,
 .theme-dark .iconVisibility-vptxma:focus .iconItem-1EjiK0,
