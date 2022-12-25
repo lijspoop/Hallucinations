@@ -121,6 +121,18 @@
 	border-color: hsl(240deg, 8%, 8%);
 }
 
+.theme-dark .spoilerText-27bIiA.hidden-3B-Rum {
+    background-color: rgba(202, 223, 255, .05);
+}
+
+.theme-dark .spoilerText-27bIiA.hidden-3B-Rum:hover {
+    background-color: rgba(159, 175, 199, .05);
+}
+
+.theme-dark .spoilerWarning-8ovW0v::before {
+    content: 'genius';
+}
+
 .theme-dark .auto-2K3UW5::-webkit-scrollbar-thumb, 
 .theme-dark .auto-2K3UW5::-webkit-scrollbar-track {
 	border: 5px solid var(--background-primary);
