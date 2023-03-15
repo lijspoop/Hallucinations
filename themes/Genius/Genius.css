@@ -1,3 +1,4 @@
+/* bd */
 .theme-dark .monaco-editor .scrollbar.vertical,
 .theme-dark .monaco-editor .decorationsOverviewRuler {
 	z-index: 1;
@@ -9,6 +10,11 @@
 	transition: opacity .25s ease-in-out, width .25s ease-in-out;
 }
 
+.theme-dark .plugin-input-group .plugin-input-group h2 + .plugin-inputs {
+	margin-left: 16px;
+}
+
+/* app */
 .theme-dark .button-y6hemj .activeButtonChild-2hgLAO:after {
 	content: "";
 	position: fixed;
@@ -22,20 +28,19 @@
 	transition: opacity .3s cubic-bezier(0.4, 0, 1, 1);
 }
 
-.theme-dark .button-y6hemj:hover .activeButtonChild-2hgLAO:after
-{
+.theme-dark .button-y6hemj:hover .activeButtonChild-2hgLAO:after {
 	opacity: 1;
 }
 
 .theme-dark .banner-1YaD3N.popoutBanner-3cqRD9.reducedMotion-395crG:hover .pencilContainer-18TrEJ,
 .theme-dark .banner-1YaD3N.profileBanner-1owKI5.reducedMotion-395crG:hover .pencilContainer-18TrEJ {
-    opacity: 1;
+	opacity: 1;
 }
 
 .theme-dark .banner-1YaD3N.popoutBanner-3cqRD9.reducedMotion-395crG .pencilContainer-18TrEJ,
 .theme-dark .banner-1YaD3N.profileBanner-1owKI5.reducedMotion-395crG .pencilContainer-18TrEJ {
-    opacity: 0;
-    transition: opacity .15s ease-in;
+	opacity: 0;
+	transition: opacity .15s ease-in;
 }
 
 .theme-dark .containerDefault-YUSmu3.selected-2TbFuo .iconItem-1EjiK0,
@@ -74,7 +79,8 @@
 	background-color: var(--input-background);
 }
 
-.theme-dark .bar-1Bhnl9, .theme-dark .markDash-yk2kJ- {
+.theme-dark .bar-1Bhnl9,
+.theme-dark .markDash-yk2kJ- {
 	background-color: var(--color-bar);
 }
 
@@ -82,7 +88,7 @@
 	background-color: var(--inner-square-disabled);
 }
 
-.theme-dark .container-1zDvAE  .container-2nx-BQ:not(.checked-25WXMf),
+.theme-dark .container-1zDvAE .container-2nx-BQ:not(.checked-25WXMf),
 .theme-dark .bd-switch:not(.bd-switch-checked) .bd-switch-body {
 	background-color: var(--switch-button) !important;
 }
@@ -96,11 +102,15 @@
 	background-color: rgb(35, 36, 39);
 }
 
-.theme-dark .tierBody-1d3UiS, .theme-dark .autocomplete-3NRXG8, .theme-dark .categoryHeader-OpJ1Ly {
+.theme-dark .tierBody-1d3UiS,
+.theme-dark .autocomplete-3NRXG8,
+.theme-dark .categoryHeader-OpJ1Ly {
 	background-color: var(--background-secondary);
 }
 
-.theme-dark .headerClickable-zGQJz3, .theme-dark .headerExpanded-1-zwDr, .theme-dark .headerDefault-1e6yjj {
+.theme-dark .headerClickable-zGQJz3,
+.theme-dark .headerExpanded-1-zwDr,
+.theme-dark .headerDefault-1e6yjj {
 	background-color: #00000026;
 }
 
@@ -122,18 +132,22 @@
 }
 
 .theme-dark .spoilerText-27bIiA.hidden-3B-Rum {
-    background-color: rgba(202, 223, 255, .05);
+	background-color: rgba(202, 223, 255, .05);
 }
 
 .theme-dark .spoilerText-27bIiA.hidden-3B-Rum:hover {
-    background-color: rgba(159, 175, 199, .05);
+	background-color: rgba(159, 175, 199, .05);
 }
 
 .theme-dark .spoilerWarning-8ovW0v::before {
-    content: 'genius';
+	content: 'genius';
 }
 
-.theme-dark .auto-2K3UW5::-webkit-scrollbar-thumb, 
+.theme-dark .dotBorderBase-3XCnzD {
+	fill: none;
+}
+
+.theme-dark .auto-2K3UW5::-webkit-scrollbar-thumb,
 .theme-dark .auto-2K3UW5::-webkit-scrollbar-track {
 	border: 5px solid var(--background-primary);
 	background-clip: padding-box;
@@ -152,8 +166,7 @@
 @media (hover: hover) {
 
 	.theme-dark .iconVisibility-vptxma:hover .iconItem-1EjiK0,
-	.theme-dark .iconVisibility-vptxma.modeSelected-3DmyhH:hover
-	.iconItem-1EjiK0 {
+	.theme-dark .iconVisibility-vptxma.modeSelected-3DmyhH:hover .iconItem-1EjiK0 {
 		display: block;
 	}
 
@@ -176,11 +189,11 @@
 	--background-floating: rgb(21, 22, 26);
 	--color-shadow-key: rgba(0, 0, 0, 0.6);
 	--input-background: rgb(22, 23, 26);
-	--channeltextarea-background: rgb(21, 22, 24);
+	--channeltextarea-background: rgb(23, 24, 27);
 	--deprecated-text-input-bg: rgb(23, 24, 27);
 	--modal-background: var(--background-secondary);
 	--modal-footer-background: var(--background-secondary-alt);
-	--button-secondary-background: var( --background-accent);
+	--button-secondary-background: var(--background-accent);
 	--scrollbar-thin-thumb: rgb(17, 17, 18);
 	--scrollbar-auto-track: rgb(26, 26, 28);
 	--scrollbar-auto-thumb: rgb(17, 17, 18);
