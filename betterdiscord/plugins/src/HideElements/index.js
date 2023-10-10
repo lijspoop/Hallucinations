@@ -230,7 +230,7 @@ module.exports = (Plugin, Library) => {
 			)
 		) {
 			let elements = [];
-			const privateChannelsHeaderContainer = parent.querySelector(
+			const privateChannelsHeaderContainer = parent?.querySelector(
 				`.${classes._privateChannels.privateChannelsHeaderContainer}`
 			)
 			if (
