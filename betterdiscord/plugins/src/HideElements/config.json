@@ -1,0 +1,34 @@
+{
+	"main": "index.js",
+	"info": {
+		"name": "HideElements",
+		"authors": [
+			{
+				"name": "neutron6663",
+				"discord_id": "352076839407190016",
+				"github_username": "neutron6663"
+			}
+		],
+		"version": "0.2.3",
+		"description": "Позволяет скрыть некоторые html элементы",
+		"github_raw": "https://raw.githubusercontent.com/neutron6663/Hallucinations/master/plugins/release/HideElements.plugin.js",
+		"changelog": [
+			{
+				"title": "Новое",
+				"items": [
+					"Говно-код теперь стал открытым говно-кодом",
+					"Добавлено автоматическое обновление",
+					"Добавлен список изменений"
+				]
+			},
+			{
+				"title": "Изменения",
+				"type": "improved",
+				"items": [
+					"Теперь используется Patcher для настроек плагина",
+					"Удален лишний код связанный с работой секций настроек"
+				]
+			}
+		]
+	}
+}

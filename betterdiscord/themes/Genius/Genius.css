@@ -15,23 +15,6 @@
 }
 
 /* app */
-.theme-dark .button-y6hemj .activeButtonChild-2hgLAO:after {
-	content: "";
-	position: fixed;
-	display: block;
-	background-image: url('https://discord.com/assets/879468637365983eba26983ddf6d38ad.svg');
-	width: 48px;
-	height: 28px;
-	opacity: 0;
-	transform: translateY(-36px) translateX(-66px);
-	background-size: 48px;
-	transition: opacity .3s cubic-bezier(0.4, 0, 1, 1);
-}
-
-.theme-dark .button-y6hemj:hover .activeButtonChild-2hgLAO:after {
-	opacity: 1;
-}
-
 .theme-dark .banner-1YaD3N.popoutBanner-3cqRD9.reducedMotion-395crG:hover .pencilContainer-18TrEJ,
 .theme-dark .banner-1YaD3N.profileBanner-1owKI5.reducedMotion-395crG:hover .pencilContainer-18TrEJ {
 	opacity: 1;
