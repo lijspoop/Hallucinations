@@ -1,7 +1,7 @@
 /**
  * @name HideElements
  * @description Позволяет скрыть некоторые html элементы
- * @version 0.2.3
+ * @version 0.2.4
  * @author neutron6663
  * @authorId 352076839407190016
  * @website https://github.com/neutron6663/Hallucinations/tree/master/betterdiscord/plugins/
@@ -41,7 +41,7 @@ const config = {
                 github_username: "neutron6663"
             }
         ],
-        version: "0.2.3",
+        version: "0.2.4",
         description: "Позволяет скрыть некоторые html элементы",
         github: "https://github.com/neutron6663/Hallucinations/tree/master/betterdiscord/plugins/",
         github_raw: "https://raw.githubusercontent.com/neutron6663/Hallucinations/master/betterdiscord/plugins/release/HideElements.plugin.js",
