@@ -11,7 +11,8 @@
 		],
 		"version": "0.2.3",
 		"description": "Позволяет скрыть некоторые html элементы",
-		"github_raw": "https://raw.githubusercontent.com/neutron6663/Hallucinations/master/plugins/release/HideElements.plugin.js",
+		"github": "https://github.com/neutron6663/Hallucinations/tree/master/betterdiscord/plugins/",
+		"github_raw": "https://raw.githubusercontent.com/neutron6663/Hallucinations/master/betterdiscord/plugins/release/HideElements.plugin.js",
 		"changelog": [
 			{
 				"title": "Новое",
