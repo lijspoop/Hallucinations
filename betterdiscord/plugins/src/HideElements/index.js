@@ -91,7 +91,7 @@ module.exports = (Plugin, Library) => {
 								this.saveSettings({
 									elements: { [index]: this.settings.elements[index] }
 								});
-								this.#visibilityToggle.element(node, state);
+								if (node.textContent) this.#visibilityToggle.element(node, state);
 							};
 							nodes.push(
 								ReactTools.createWrappedElement(
@@ -110,7 +110,7 @@ module.exports = (Plugin, Library) => {
 				}
 			);
 			// https://github.com/BetterDiscord/BetterDiscord/tree/main/renderer/src/ui/settings.js#L100
-			ReactTools.getStateNodes(getSideBar())[0].forceUpdate();
+			ReactTools.getStateNodes(getSideBar())[0]?.forceUpdate();
 		}
 
 		onStop() {

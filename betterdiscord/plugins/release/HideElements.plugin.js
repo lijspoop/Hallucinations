@@ -1,7 +1,7 @@
 /**
  * @name HideElements
  * @description Позволяет скрыть некоторые html элементы
- * @version 0.2.6
+ * @version 0.2.7
  * @author neutron6663
  * @authorId 352076839407190016
  * @website https://github.com/neutron6663/Hallucinations/tree/master/betterdiscord/plugins/
@@ -41,7 +41,7 @@ const config = {
                 github_username: "neutron6663"
             }
         ],
-        version: "0.2.6",
+        version: "0.2.7",
         description: "Позволяет скрыть некоторые html элементы",
         github: "https://github.com/neutron6663/Hallucinations/tree/master/betterdiscord/plugins/",
         github_raw: "https://neutron6663.github.io/Hallucinations/betterdiscord/plugins/release/HideElements.plugin.js",
@@ -186,7 +186,7 @@ module.exports = !global.ZeresPluginLibrary ? Dummy : (([Plugin, Api]) => {
 								this.saveSettings({
 									elements: { [index]: this.settings.elements[index] }
 								});
-								this.#visibilityToggle.element(node, state);
+								if (node.textContent) this.#visibilityToggle.element(node, state);
 							};
 							nodes.push(
 								ReactTools.createWrappedElement(
@@ -205,7 +205,7 @@ module.exports = !global.ZeresPluginLibrary ? Dummy : (([Plugin, Api]) => {
 				}
 			);
 			// https://github.com/BetterDiscord/BetterDiscord/tree/main/renderer/src/ui/settings.js#L100
-			ReactTools.getStateNodes(getSideBar())[0].forceUpdate();
+			ReactTools.getStateNodes(getSideBar())[0]?.forceUpdate();
 		}
 
 		onStop() {
