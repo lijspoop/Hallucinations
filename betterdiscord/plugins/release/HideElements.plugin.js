@@ -4,7 +4,8 @@
  * @version 0.2.3
  * @author neutron6663
  * @authorId 352076839407190016
- * @source https://raw.githubusercontent.com/neutron6663/Hallucinations/master/plugins/release/HideElements.plugin.js
+ * @website https://github.com/neutron6663/Hallucinations/tree/master/betterdiscord/plugins/
+ * @source https://raw.githubusercontent.com/neutron6663/Hallucinations/master/betterdiscord/plugins/release/HideElements.plugin.js
  */
 /*@cc_on
 @if (@_jscript)
@@ -42,7 +43,8 @@ const config = {
         ],
         version: "0.2.3",
         description: "Позволяет скрыть некоторые html элементы",
-        github_raw: "https://raw.githubusercontent.com/neutron6663/Hallucinations/master/plugins/release/HideElements.plugin.js",
+        github: "https://github.com/neutron6663/Hallucinations/tree/master/betterdiscord/plugins/",
+        github_raw: "https://raw.githubusercontent.com/neutron6663/Hallucinations/master/betterdiscord/plugins/release/HideElements.plugin.js",
         changelog: [
             {
                 title: "Новое",

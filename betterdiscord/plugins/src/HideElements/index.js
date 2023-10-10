@@ -1,8 +1,3 @@
-/**
- * @param {import("D:\\мусор\\code\\js\\nodejs\\zpl\\node_modules\\zerespluginlibrary\\types\\structs\\plugin.d").default} Plugin
- * @param {import("D:\\мусор\\code\\js\\nodejs\\zpl\\node_modules\\zerespluginlibrary").BoundAPI} Library
- * @returns
- */
 module.exports = (Plugin, Library) => {
 	const {
 		DOMTools,
