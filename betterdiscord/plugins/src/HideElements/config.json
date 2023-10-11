@@ -9,25 +9,16 @@
 				"github_username": "neutron6663"
 			}
 		],
-		"version": "0.2.7",
+		"version": "0.2.8",
 		"description": "Позволяет скрыть некоторые html элементы",
 		"github": "https://github.com/neutron6663/Hallucinations/tree/master/betterdiscord/plugins/",
 		"github_raw": "https://neutron6663.github.io/Hallucinations/betterdiscord/plugins/release/HideElements.plugin.js",
 		"changelog": [
 			{
-				"title": "Новое",
-				"items": [
-					"Говно-код теперь стал открытым говно-кодом",
-					"Добавлено автоматическое обновление",
-					"Добавлен список изменений"
-				]
-			},
-			{
 				"title": "Изменения",
 				"type": "improved",
 				"items": [
-					"Теперь используется Patcher для настроек плагина",
-					"Удален лишний код связанный с работой секций настроек"
+					"Сократил код, убрал лишние условия, а также одну функцию"
 				]
 			}
 		]

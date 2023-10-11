@@ -6,7 +6,8 @@ module.exports = (Plugin, Library) => {
 		Patcher,
 		Filters,
 		PluginUpdater,
-		ReactTools
+		ReactTools,
+		Settings
 	} = Library;
 
 	const classes = {
@@ -47,12 +48,12 @@ module.exports = (Plugin, Library) => {
 				this._config.info.version,
 				this._config.info.github_raw
 			);
+			this.visibilityToggle.all(true);
 
 			// https://github.com/BetterDiscord/BetterDiscord/tree/main/renderer/src/ui/settings.js#L69
 			const UserSettings = await BdApi.Webpack.waitForModule(
 				Filters.byPrototypeFields(['getPredicateSections'])
 			);
-			this.#visibilityToggle.all(true);
 			Patcher.after(
 				UserSettings.prototype,
 				'getPredicateSections',
@@ -62,7 +63,6 @@ module.exports = (Plugin, Library) => {
 							(s) => s.section.toLowerCase() == 'changelog'
 						) - 1;
 					if (location < 0 || !this._enabled) return;
-					this.#hidePluginSections(false);
 					const insert = (section) => {
 						returnValue.splice(location, 0, section);
 						location++;
@@ -72,40 +72,32 @@ module.exports = (Plugin, Library) => {
 						section: 'HEADER',
 						label: this.name.match(/[A-Z][a-z]+/g).join(' ')
 					});
-
-					const elements =
-						this.#getElements() ?? Object.entries(this.settings.elements);
-					let nodes = [];
-					if (elements?.length) {
-						elements.forEach((node, index) => {
-							const setting = {
-								type: 'switch',
-								// node.textContent ?? [index] - ключ; [1] элемент массива [ false, "Друзья" ])
-								name: node.textContent ?? this.settings.elements[index][1],
-								id: index
-							};
-
-							setting.value = this.settings.elements[index][0] ?? false;
-							setting.onChange = (state) => {
-								this.settings.elements[index][0] = state;
-								this.saveSettings({
-									elements: { [index]: this.settings.elements[index] }
-								});
-								if (node.textContent) this.#visibilityToggle.element(node, state);
-							};
-							nodes.push(
-								ReactTools.createWrappedElement(
-									this.buildSetting(setting).getElement()
-								)
-							);
-						});
-					}
-
 					insert({
 						section: 'Hidden Elements',
 						label: 'Скрытые элементы',
 						element: () =>
-							this.#createSectionContent('Скрытые элементы', ...nodes)
+							this.createSectionContent(
+								'Скрытые элементы',
+								...(
+									this.getElements() ?? Object.entries(this.settings.elements)
+								).map((node, index) =>
+									ReactTools.createWrappedElement(
+										new Settings.Switch(
+											node.textContent ?? this.settings.elements[index][1],
+											'',
+											this.settings.elements[index][0] ?? false,
+											(state) => {
+												this.settings.elements[index][0] = state;
+												this.saveSettings({
+													elements: { [index]: this.settings.elements[index] }
+												});
+												if (node.textContent)
+													this.visibilityToggle.element(node, state);
+											}
+										).getElement()
+									)
+								)
+							)
 					});
 				}
 			);
@@ -115,8 +107,8 @@ module.exports = (Plugin, Library) => {
 
 		onStop() {
 			Patcher.unpatchAll();
-			this.#visibilityToggle.all();
-			this.#hidePluginSections();
+			ReactTools.getStateNodes(getSideBar())[0]?.forceUpdate();
+			this.visibilityToggle.all();
 		}
 
 		/**
@@ -128,33 +120,27 @@ module.exports = (Plugin, Library) => {
 		 * @param {MutationRecord} mutation https://developer.mozilla.org/en-US/docs/Web/API/MutationRecord
 		 */
 		observer({ addedNodes }) {
-			if (!addedNodes?.length || !(addedNodes[0] instanceof Element)) return;
-			const element = addedNodes[0];
-			const privateChannelsElement = DOMTools.hasClass(
-				element,
-				classes._privateChannels.channel
-			)
-				? element
-				: null;
-			if (privateChannelsElement?.nextElementSibling) {
-				const privateChannelsHeaderContainer = DOMTools.hasClass(
-					privateChannelsElement.nextElementSibling,
+			if (
+				!addedNodes?.length ||
+				!(addedNodes[0] instanceof Element) ||
+				!DOMTools.hasClass(addedNodes[0], classes._privateChannels.channel) ||
+				!addedNodes[0]?.nextElementSibling ||
+				!DOMTools.hasClass(
+					addedNodes[0].nextElementSibling,
 					classes._privateChannels.privateChannelsHeaderContainer
 				)
-					? privateChannelsElement.nextElementSibling
-					: null;
-				if (!privateChannelsHeaderContainer) return;
-				this.#hideElements();
-			}
+			)
+				return;
+			this.hideElements();
 		}
 
 		onSwitch() {
-			this.#hideElements();
+			this.hideElements();
 		}
 
-		#visibilityToggle = {
+		visibilityToggle = {
 			all: (hide = false) => {
-				this.#hideElements(hide);
+				this.hideElements(hide);
 			},
 			element: (node, hide = false) => {
 				if (!node) return false;
@@ -170,7 +156,7 @@ module.exports = (Plugin, Library) => {
 			}
 		};
 
-		#createSectionContent(parent, ...nodes) {
+		createSectionContent(parent, ...reactNodes) {
 			const React = BdApi.React;
 			const divProps = {};
 			let h2 = React.createElement(
@@ -196,11 +182,11 @@ module.exports = (Plugin, Library) => {
 				{
 					className: classes.settings.sectionContent.children
 				},
-				...nodes
+				...reactNodes
 			);
 			let childNodes = [sectionTitle, children];
 
-			if (!nodes.length || !this._enabled) {
+			if (!reactNodes.length || !this._enabled) {
 				h2 = React.createElement(
 					'h2',
 					{
@@ -224,7 +210,7 @@ module.exports = (Plugin, Library) => {
 			return React.createElement('div', divProps, ...childNodes);
 		}
 
-		#getElements(
+		getElements(
 			parent = document.querySelector(
 				`.${classes._privateChannels.privateChannels}`
 			)
@@ -232,12 +218,8 @@ module.exports = (Plugin, Library) => {
 			let elements = [];
 			const privateChannelsHeaderContainer = parent?.querySelector(
 				`.${classes._privateChannels.privateChannelsHeaderContainer}`
-			)
-			if (
-				!parent ||
-				!privateChannelsHeaderContainer
-			)
-				return null;
+			);
+			if (!parent || !privateChannelsHeaderContainer) return null;
 			for (
 				let item = privateChannelsHeaderContainer.previousElementSibling;
 				item && item.ariaHidden != 'true';
@@ -267,9 +249,9 @@ module.exports = (Plugin, Library) => {
 			return elements;
 		}
 
-		#hideElements(hide = true) {
+		hideElements(hide = true) {
 			const settingsElement = this.settings.elements;
-			const elements = this.#getElements();
+			const elements = this.getElements();
 			if (!Object.keys(settingsElement).length || !elements || !elements.length)
 				return null;
 			for (
@@ -279,30 +261,7 @@ module.exports = (Plugin, Library) => {
 			) {
 				const setting = settingsElement[index];
 				if (!setting[0]) continue;
-				this.#visibilityToggle.element(elements[index], hide);
-			}
-		}
-
-		#hidePluginSections(hide = true) {
-			let sidebar = getSideBar();
-			if (sidebar) {
-				const sidebarNodes = sidebar.querySelector('nav > div').childNodes;
-				const hideelements = Array.prototype.filter.call(
-					sidebar.querySelectorAll('[data-text-variant="eyebrow"]'),
-					(node) => {
-						return (
-							node.textContent == this.name.match(/[A-Z][a-z]+/g).join(' ')
-						);
-					}
-				);
-				if (!hideelements[0]) return;
-				const index = Array.prototype.indexOf.call(
-					sidebarNodes,
-					hideelements[0]?.parentElement
-				);
-				Array.prototype.slice
-					.call(sidebarNodes, index, index + 3)
-					.forEach((element) => this.#visibilityToggle.element(element, hide));
+				this.visibilityToggle.element(elements[index], hide);
 			}
 		}
 	};

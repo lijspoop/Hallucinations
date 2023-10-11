@@ -1,2 +1,2 @@
-# BD-Hallucinations
-BetterDiscord's hallucinations
+# Hallucinations
+Всякая моя дичь в вебе
