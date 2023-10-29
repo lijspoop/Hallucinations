@@ -186,18 +186,13 @@ module.exports = !global.ZeresPluginLibrary ? Dummy : (([Plugin, Api]) => {
 		};
 
 		onStart = async () => {
-			await PluginUpdater.checkForUpdate(
-				this._config.info.name,
-				this._config.info.version,
-				this._config.info.github_raw
-			);
+			await PluginUpdater.checkForUpdate(config.info.name, config.info.version, config.info.github_raw);
 			(new BdApi(config.info.name)).DOM.addStyle(`.${this.classes.custom.hidden} {display: none;}`);
 			this.$ = Object.setPrototypeOf(this.$, {
 				toggle: (indicator) => {
 					const changes = [];
 					const elements =
 						this.getElements((elements, settings) => {
-							console.log(elements, settings);
 						for (let index = 0; index < settings.length; index++) {
 							if (!settings[index][0]) continue;
 							changes.push([elements[index], indicator]);
