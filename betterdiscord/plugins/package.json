@@ -1,0 +1,24 @@
+{
+  "private": true,
+  "name": "plugins",
+  "version": "1.0.0",
+  "scripts": {
+    "build": "zpl build",
+    "init": "zpl init"
+  },
+  "author": "lijspoop <lijs.poop@gmail.com>",
+  "license": "MIT",
+  "zplConfig": {
+    "base": "./src",
+    "out": "./release",
+    "copyToBD": true,
+    "addInstallScript": true
+  },
+  "dependencies": {
+    "@types/bandagedbd__bdapi": "^1.8.2",
+    "zerespluginlibrary": "^2.0.6"
+  },
+  "devDependencies": {
+    "esbuild": "0.19.5"
+  }
+}

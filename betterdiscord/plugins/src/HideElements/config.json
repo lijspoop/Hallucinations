@@ -6,12 +6,12 @@
 			{
 				"name": "neutron6663",
 				"discord_id": "352076839407190016",
-				"github_username": "neutron6663"
+				"github_username": "lijspoop"
 			}
 		],
-		"version": "0.2.9",
+		"version": "0.3.0",
 		"description": "Позволяет скрыть некоторые HTML элементы",
-		"github": "https://github.com/neutron6663/Hallucinations/tree/master/betterdiscord/plugins/",
-		"github_raw": "https://neutron6663.github.io/Hallucinations/betterdiscord/plugins/release/HideElements.plugin.js"
+		"github": "https://github.com/lijspoop/Hallucinations/tree/master/betterdiscord/plugins/",
+		"github_raw": "https://raw.githubusercontent.com/lijspoop/Hallucinations/master/betterdiscord/plugins/release/HideElements.plugin.js"
 	}
 }

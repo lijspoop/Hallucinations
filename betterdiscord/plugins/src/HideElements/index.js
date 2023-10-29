@@ -1,3 +1,7 @@
+/**
+ * @param Plugin
+ * @param {import('zerespluginlibrary').BoundAPI} Library
+ */
 module.exports = (Plugin, Library) => {
 	const {
 		DOMTools,
@@ -17,20 +21,20 @@ module.exports = (Plugin, Library) => {
 	return class HideElements extends Plugin {
 		constructor() {
 			super();
-			this.defaultSettings = {};
-			this.defaultSettings.elements = [];
-			this.defaultSettings.sections = [];
+			this.defaultSettings = {
+				elements: []
+			}
 		}
 
 		classes = {
+			custom: {
+				hidden: 'lijs-he-hidden'
+			},
 			settings: {
-				...findClass('standardSidebarView'),
-				sectionContent: {
-					...findClass('children', 'sectionTitle'),
-					...findClass('h1', 'title', 'defaultColor'),
-					...DiscordClasses.Dividers,
-					empty: findClass('settings', 'container')
-				}
+				...findClass('children', 'sectionTitle'),
+				...findClass('h1', 'title', 'defaultColor'),
+				...DiscordClasses.Dividers,
+				empty: findClass('settings', 'container')
 			},
 			_privateChannels: {
 				...findClass('privateChannels'),
@@ -39,24 +43,19 @@ module.exports = (Plugin, Library) => {
 			}
 		};
 
-		classHidden = this.classes.settings.hidden ?? 'hidden';
-
-		getSideBar() {
-			const viewClass = findClass(
-				'standardSidebarView'
-			).standardSidebarView.split(' ')[0];
-			return document.querySelector(`.${viewClass}`);
-		}
+		getSideBar = () => document.querySelector(
+			`.${findClass('standardSidebarView').standardSidebarView.split(' ')[0]}`
+		);
 		/**
 		 *
-		 * @param { (elements: Element[] | [], settings: [boolean, string][] | []) => {} } cb
-		 * @returns { [ Element[] | undefined, [boolean, string][] | undefined ] }
+		 * @param  { (elements: Element[] | [], settings: [boolean, string][] | []) => {} } cb
+		 * @returns
 		 */
-		getElements(cb = () => {}) {
+		getElements = (cb = () => {}) => {
 			/**
 			 * @type { Element[] | []}
 			 */
-			let elements = [];
+			let elements = undefined;
 			/**
 			 * @type { [boolean, string][] }
 			 */
@@ -64,58 +63,74 @@ module.exports = (Plugin, Library) => {
 			let element = document.querySelector(
 				`.${this.classes._privateChannels.privateChannelsHeaderContainer}`
 			);
-			if (!element) return [undefined, settings];
+			if (!element) return [elements, settings];
+			else elements = [];
+
 			for (
 				element = element.previousElementSibling;
-				element && element.ariaHidden != 'true';
+				element && element.ariaHidden !== 'true';
 				element = element.previousElementSibling
 			) {
 				elements.unshift(element);
 			}
-
 			settings
 				.filter(
 					([, textContent]) =>
-						!elements.some((element) => textContent == element.textContent)
+						!elements.some((element) => textContent === element.textContent)
 				)
 				.forEach(([, text]) =>
 					settings.splice(
-						settings.findIndex(([, removedText]) => removedText == text),
+						settings.findIndex(([, removedText]) => removedText === text),
 						1
 					)
 				);
 			elements
 				.map(({ textContent }, index) =>
-					!settings.some(([, text]) => textContent == text)
+					!settings.some(([, text]) => textContent === text)
 						? [index, textContent]
 						: undefined
 				)
 				.filter((arr) => arr)
 				.forEach(([index, textContent]) =>
-					settings.splice(index, 0, [!!0, textContent])
+					settings.splice(index, 0, [false, textContent])
 				);
 			this.saveSettings({ elements: settings });
 
-			if (!!settings.length || !!elements.length) cb(elements, settings);
+			if (!!elements.length || !!settings.length) cb(elements, settings);
 			return [!!elements.length ? elements : undefined, settings];
-		}
+		};
 
-		async onStart() {
-			PluginUpdater.checkForUpdate(
+		$ = (element) => {
+			return {
+				/**
+				 * @param { boolean? } indicator
+				 * @returns {Element}
+				 */
+				toggle: (indicator) =>
+					DOMTools.toggleClass(element, this.classes.custom.hidden, indicator),
+				elements: this.getElements
+			};
+		};
+
+		onStart = async () => {
+			await PluginUpdater.checkForUpdate(
 				this._config.info.name,
 				this._config.info.version,
 				this._config.info.github_raw
 			);
+			(new BdApi(config.info.name)).DOM.addStyle(`.${this.classes.custom.hidden} {display: none;}`);
 			this.$ = Object.setPrototypeOf(this.$, {
 				toggle: (indicator) => {
 					const changes = [];
-					const elements = this.getElements((elements, settings) => {
+					const elements =
+						this.getElements((elements, settings) => {
+							console.log(elements, settings);
 						for (let index = 0; index < settings.length; index++) {
 							if (!settings[index][0]) continue;
 							changes.push([elements[index], indicator]);
 							DOMTools.toggleClass(
 								elements[index],
-								this.classHidden,
+								this.classes.custom.hidden,
 								indicator
 							);
 						}
@@ -123,7 +138,7 @@ module.exports = (Plugin, Library) => {
 					return [...elements, changes];
 				}
 			});
-			this.$.toggle(!0);
+			void this.$.toggle(true);
 
 			// https://github.com/BetterDiscord/BetterDiscord/tree/main/renderer/src/ui/settings.js#L69
 			const UserSettings = await BdApi.Webpack.waitForModule(
@@ -134,58 +149,51 @@ module.exports = (Plugin, Library) => {
 				'getPredicateSections',
 				(thisObject, args, returnValue) => {
 					if (!this._enabled) return;
-					// returnValue.splice(
-					// 	returnValue.findIndex(
-					// 		({ label }) => label == 'Настройки выставления счетов'
-					// 	),
-					// 	7
-					// );
 					let location =
 						returnValue.findIndex(
-							(s) => s.section.toLowerCase() == 'changelog'
+							(s) => s.section.toLowerCase() === 'changelog'
 						) - 1;
 					if (location < 0) return;
 					const insert = (section) => {
 						returnValue.splice(location, 0, section);
 						location++;
 					};
-					insert({ section: 'DIVIDER' });
+					insert({ section: 'DIVIDER', canHidden: false });
 					insert({
 						section: 'HEADER',
-						label: this.name.match(/[A-Z][a-z]+/g).join(' ')
+						label: this.name.match(/[A-Z][a-z]+/g).join(' '),
+						canHidden: false
 					});
-
 					let [elements, settings] = this.getElements();
 					insert({
 						section: 'Hidden Elements',
 						label: 'Скрытые элементы',
-						element: () =>
-							this.renderSectionContent(
-								'Скрытые элементы',
-								...(elements ?? settings).map((node) => {
-									const textContent = node.textContent ?? node[1];
+						element: () => this.renderSectionContent('Скрытые элементы',
+								...(elements || settings).map((node) => {
+									const textContent = node.textContent || node[1];
 									const indexFound = settings.findIndex(
-										(set) => set[1] == textContent
+										(set) => set[1] === textContent
 									);
 									return ReactTools.createWrappedElement(
 										new Settings.Switch(
 											textContent,
 											'',
-											!!settings.length ? settings[indexFound][0] : !!0,
+											!!settings.length ? settings[indexFound][0] : false,
 											(state) => {
-												if (indexFound != -1) settings[indexFound][0] = state;
+												if (indexFound !== -1) settings[indexFound][0] = state;
 												else if (settings)
 													settings.push([state, node.textContent]);
 												else settings = [[state, node.textContent]];
 												this.saveSettings({
 													elements: settings
 												});
-												if (node.textContent) this.$(node).toggle(state);
+												if (node.textContent) void this.$(node).toggle(state);
 											}
 										).getElement()
 									);
 								})
-							)
+							),
+						canHidden: false
 					});
 				}
 			);
@@ -193,10 +201,11 @@ module.exports = (Plugin, Library) => {
 			ReactTools.getStateNodes(this.getSideBar())[0]?.forceUpdate();
 		}
 
-		onStop() {
-			Patcher.unpatchAll();
+		onStop = () => {
 			ReactTools.getStateNodes(this.getSideBar())[0]?.forceUpdate();
-			this.$.toggle(!!0);
+			Patcher.unpatchAll();
+			(new BdApi(config.info.name)).DOM.removeStyle();
+			void this.$.toggle(false);
 		}
 
 		/**
@@ -207,9 +216,9 @@ module.exports = (Plugin, Library) => {
 		 * https://developer.mozilla.org/en-US/docs/Web/API/MutationObserver
 		 * @param {MutationRecord} mutation https://developer.mozilla.org/en-US/docs/Web/API/MutationRecord
 		 */
-		observer({ addedNodes }) {
+		observer = ({ addedNodes }) => {
 			if (
-				!addedNodes?.length ||
+				!addedNodes.length ||
 				!(addedNodes[0] instanceof Element) ||
 				!DOMTools.hasClass(
 					addedNodes[0],
@@ -222,56 +231,40 @@ module.exports = (Plugin, Library) => {
 				)
 			)
 				return;
-			this.$.toggle(!0);
+			void this.$.toggle(true);
 		}
 
-		onSwitch() {
-			this.$.toggle(!0);
+		onSwitch = ()=> {
+			void this.$.toggle(true);
 		}
 
-		/**
-		 * Ну типа пародия на jquery, поняли отсылку, да?
-		 * @param {Element | undefined} element
-		 * @returns
-		 */
-		$(element) {
-			console.log(arguments);
-			return Object.create(element, {
-				/**
-				 * @param { boolean? } indicator
-				 * @returns { Element[] | [Element, boolean]}
-				 */
-				toggle: (indicator) =>
-					DOMTools.toggleClass(element, this.classHidden, indicator),
-				elements: this.getElements
-			});
-		}
-
-		renderSectionContent(parent, ...reactNodes) {
+		renderSectionContent = (header, ...reactNodes) => {
 			const React = BdApi.React;
 			const divProps = {};
 			let childNodes = [
 				React.createElement(
 					'div',
 					{
-						className: this.classes.settings.sectionContent.sectionTitle
+						className: this.classes.settings.sectionTitle
 					},
 					React.createElement(
 						'h2',
 						{
 							className: [
-								this.classes.settings.sectionContent.h1,
-								this.classes.settings.sectionContent.defaultColor,
-								this.classes.settings.sectionContent.defaultMarginh1
+								this.classes.settings.h1,
+								this.classes.settings.defaultColor,
+								this.classes.settings.defaultMarginh1
 							].join(' ')
 						},
-						parent.textContent ?? parent
+						header.textContent ||
+						header ||
+						this.name.match(/[A-Z][a-z]+/g).join(' ')
 					)
 				),
 				React.createElement(
 					'div',
 					{
-						className: this.classes.settings.sectionContent.children
+						className: this.classes.settings.children
 					},
 					...reactNodes
 				)
@@ -280,20 +273,20 @@ module.exports = (Plugin, Library) => {
 			if (!reactNodes.length || !this._enabled) {
 				divProps.className = [
 					'no-hidden-elements',
-					this.classes.settings.sectionContent.empty.container,
-					this.classes.settings.sectionContent.empty.settings
+					this.classes.settings.empty.container,
+					this.classes.settings.empty.settings
 				].join(' ');
 				childNodes = [
 					React.createElement(
 						'h2',
 						{
 							className: [
-								this.classes.settings.sectionContent.defaultColor,
-								this.classes.settings.sectionContent['heading-xl/semibold']
+								this.classes.settings.defaultColor,
+								this.classes.settings['heading-xl/semibold']
 							].join(' ')
 						},
 						this._enabled
-							? 'Отсуствуют элементы, которые можно скрыть'
+							? 'Отсутствуют элементы, которые можно скрыть'
 							: 'Плагин выключен'
 					)
 				];
