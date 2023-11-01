@@ -186,7 +186,15 @@ module.exports = !global.ZeresPluginLibrary ? Dummy : (([Plugin, Api]) => {
 		};
 
 		onStart = async () => {
-			await PluginUpdater.checkForUpdate(config.info.name, config.info.version, config.info.github_raw);
+			await PluginUpdater.checkForUpdate(config.info.name, config.info.version, config.info.github_raw,
+				(current, remote) => {
+					// в оригинале: return remote > current
+					current = current.split('.').map((str) => +str); remote = remote.split('.').map((e) => +e);
+					if (current[0] < remote[0]) return true;
+					else if (current[0] === remote[0] && current[1] < remote[1]) return true;
+					else if (current[0] === remote[0] && current[1] === remote[1] && current[2] < remote[2]) return true;
+					return false;
+				});
 			(new BdApi(config.info.name)).DOM.addStyle(`.${this.classes.custom.hidden} {display: none;}`);
 			this.$ = Object.setPrototypeOf(this.$, {
 				toggle: (indicator) => {
