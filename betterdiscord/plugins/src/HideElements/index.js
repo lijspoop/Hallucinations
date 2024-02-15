@@ -36,6 +36,7 @@ module.exports = (Plugin, Library) => {
 				...DiscordClasses.Dividers,
 				empty: findClass('settings', 'container')
 			},
+			// 
 			_privateChannels: {
 				...findClass('privateChannels'),
 				...findClass('privateChannelsHeaderContainer'),
@@ -46,8 +47,9 @@ module.exports = (Plugin, Library) => {
 		getSideBar = () => document.querySelector(
 			`.${findClass('standardSidebarView').standardSidebarView.split(' ')[0]}`
 		);
+
 		/**
-		 *
+		 * this function is responsible for finding elements to hide
 		 * @param  { (elements: Element[] | [], settings: [boolean, string][] | []) => {} } cb
 		 * @returns
 		 */
@@ -100,21 +102,24 @@ module.exports = (Plugin, Library) => {
 			return [!!elements.length ? elements : undefined, settings];
 		};
 
+		// Hides elements
+		// $(element).toggle(bool) - hides one element
 		$ = (element) => {
 			return {
 				/**
 				 * @param { boolean? } indicator
 				 * @returns {Element}
 				 */
-				toggle: (indicator) =>
-					DOMTools.toggleClass(element, this.classes.custom.hidden, indicator),
-				elements: this.getElements
+				toggle: (indicator) => DOMTools.toggleClass(element, this.classes.custom.hidden, indicator)
 			};
 		};
 
 		onStart = async () => {
 			await PluginUpdater.checkForUpdate(config.info.name, config.info.version, config.info.github_raw);
-			(new BdApi(config.info.name)).DOM.addStyle(`.${this.classes.custom.hidden} {display: none;}`);
+			
+			new BdApi(config.info.name).DOM.addStyle(`.${this.classes.custom.hidden} {display: none;}`);
+			// parody of jQuery
+			// $.toggle(bool) - hides all elements
 			this.$ = Object.setPrototypeOf(this.$, {
 				toggle: (indicator) => {
 					const changes = [];
@@ -136,6 +141,7 @@ module.exports = (Plugin, Library) => {
 			void this.$.toggle(true);
 
 			// https://github.com/BetterDiscord/BetterDiscord/tree/main/renderer/src/ui/settings.js#L69
+			// adds a new settings section in "User Settings"
 			const UserSettings = await BdApi.Webpack.waitForModule(
 				Filters.byPrototypeFields(['getPredicateSections'])
 			);
@@ -172,7 +178,7 @@ module.exports = (Plugin, Library) => {
 									return ReactTools.createWrappedElement(
 										new Settings.Switch(
 											textContent,
-											'',
+											'', // empty description
 											!!settings.length ? settings[indexFound][0] : false,
 											(state) => {
 												if (indexFound !== -1) settings[indexFound][0] = state;
@@ -195,7 +201,8 @@ module.exports = (Plugin, Library) => {
 			// https://github.com/BetterDiscord/BetterDiscord/tree/main/renderer/src/ui/settings.js#L100
 			ReactTools.getStateNodes(this.getSideBar())[0]?.forceUpdate();
 		}
-
+		
+		// 
 		onStop = () => {
 			ReactTools.getStateNodes(this.getSideBar())[0]?.forceUpdate();
 			Patcher.unpatchAll();
@@ -228,11 +235,14 @@ module.exports = (Plugin, Library) => {
 				return;
 			void this.$.toggle(true);
 		}
-
+		
+		// hides elements, if present, when switching pages
 		onSwitch = ()=> {
 			void this.$.toggle(true);
 		}
 
+		
+		// display settings contents
 		renderSectionContent = (header, ...reactNodes) => {
 			const React = BdApi.React;
 			const divProps = {};
