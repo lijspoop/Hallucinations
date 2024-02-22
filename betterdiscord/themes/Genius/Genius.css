@@ -122,10 +122,6 @@
 	background-color: rgba(159, 175, 199, .05);
 }
 
-.theme-dark .spoilerWarning-8ovW0v::before {
-	content: 'genius';
-}
-
 .theme-dark .dotBorderBase-3XCnzD {
 	fill: none;
 }
@@ -144,6 +140,10 @@
 .theme-dark .auto-2K3UW5::-webkit-scrollbar-track {
 	border: 5px solid var(--background-primary) !important;
 	background-color: var(--scrollbar-auto-track);
+}
+
+.theme-deark .userProfileInnerThemedNonPremium__3d0a6 .wrapper_edb6e0.avatar__445f3 circle {
+    opacity: 0 !important;
 }
 
 @media (hover: hover) {
