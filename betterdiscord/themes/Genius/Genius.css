@@ -146,6 +146,11 @@
     opacity: 0 !important;
 }
 
+.theme-dark .biteSizeOverlayBackground_c69a7b, .theme-dark .fullSizeOverlayBackground_c69a7b {
+	background-color: transparent;
+	border: none;
+}
+
 @media (hover: hover) {
 
 	.theme-dark .iconVisibility-vptxma:hover .iconItem-1EjiK0,
