@@ -1,7 +1,7 @@
 /* ==UserStyle==
 @name           AT - VK тема
 @namespace      Hallucinations
-@version        1.0.3
+@version        1.0.4
 @description    VK тема для author.today
 @homepageURL    https://github.com/lijspoop/Hallucinations/
 @license        MIT
@@ -1817,6 +1817,7 @@
 	.nav .open > a:hover,
 	.nav .open > a:focus,
 	.comments .highlighted,
+	.feed-row.is-new,
 	.comment header.is-pinned,
 	.comment-toggle-expand,
 	.sidebar:not(.search-sidebar) > .nav > li:hover {
@@ -2665,6 +2666,11 @@
 
 	.qq-uploader {
 		background-color: transparent;
+	}
+
+	.aside-profile-stats .stats-sep {
+		position: absolute;
+		left: 0;
 	}
 
 	/* 	.library .book-cover .cover-image img {
