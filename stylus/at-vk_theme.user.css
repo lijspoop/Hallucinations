@@ -1,7 +1,7 @@
 /* ==UserStyle==
 @name           AT - VK тема
 @namespace      Hallucinations
-@version        1.0.2
+@version        1.0.3
 @description    VK тема для author.today
 @homepageURL    https://github.com/lijspoop/Hallucinations/
 @license        MIT
@@ -1569,9 +1569,54 @@
 		-webkit-font-smoothing: subpixel-antialiased;
 	}
 
+	body {
+		--dropdown-action-sheet-padding: 8px;
+	}
+
 	.brightness-5 #reader p,
 	.brightness-5 p {
 		color: rgb(163, 163, 163);
+	}
+
+	.btn {
+		border: 0;
+		border-radius: var(--vkui--size_border_radius--regular);
+		margin: 0;
+		max-width: 100%;
+		min-height: var(--vkui--size_button_small_height--compact);
+		min-width: var(--vkui--size_button_minimum_width--regular);
+		padding: 0 var(--vkui--size_button_base_small_padding_horizontal--regular);
+		position: relative;
+	}
+
+	.btn.btn-default,
+	.text-dark {
+		color: var(--vkui--color_text_accent_themed);
+	}
+
+	.btn.btn-default {
+		background-color: var(--vkui--color_background_secondary_alpha);
+	}
+
+	.btn.btn-primary,
+	.btn-toggle-action.btn-success .hover-content,
+	.btn-toggle-action.btn-primary .hover-content {
+		background-color: var(--vkui--color_background_accent_themed);
+		color: var(--vkui--color_text_contrast_themed);
+	}
+
+	.btn-dropdown,
+	.btn[data-toggle="dropdown"],
+	.btn.btn-icon,
+	.btn-lg-icon,
+	.library-dropdowns .btn-dropdown {
+		min-width: auto;
+		min-height: auto;
+		padding: 2px 7px;
+	}
+
+	.btn-nav-add {
+		margin: 11px;
 	}
 
 	.new-year-layout .topnavbar-wrapper,
@@ -1597,7 +1642,8 @@
 	.feed-row,
 	.brightness-5 .aside,
 	.layout-fixed .wrapper .aside,
-	.drop-element.drop-theme-arrows.drop-element-attached-bottom.drop-element-attached-center.drop-view-comment .drop-content {
+	.drop-element.drop-theme-arrows.drop-element-attached-bottom.drop-element-attached-center.drop-view-comment .drop-content,
+	.profile .cover .cover-buttons {
 		background-color: var(--vkui--color_background_content);
 	}
 
@@ -1723,7 +1769,8 @@
 	.panel .panel-heading > a:last-of-type,
 	.panel .panel-sub-heading > a:last-of-type,
 	.comments,
-	.text-muted {
+	.text-muted,
+	.search-sidebar.two-level > .nav > li.sidebar .nav > li > a {
 		color: var(--vkui--color_text_subhead);
 	}
 
@@ -1741,14 +1788,93 @@
 	.friend-card,
 	.panel-heading.panel-nav,
 	.nav-pills-v2,
-	.library .aside-left .nav-pills > li,
-	.library .aside-left .nav-pills > li > a,
 	.profile-top-wrapper,
 	.feed-row,
 	body:not(.account-layout) .aside-profile.profile-card,
 	.drop-element.drop-theme-arrows.drop-element-attached-bottom.drop-element-attached-center.drop-view-comment .drop-content,
-	.book-review-info {
+	.book-review-info,
+	.my-profile-avatar .avatar-edit {
 		border-radius: var(--vkui--size_border_radius_paper--regular);
+	}
+
+	.nav-pills-v2 .nav > li,
+	.nav-pills-v2 .nav > li.active,
+	.book-page .nav-tabs > li,
+	.my-profile-avatar .avatar-edit .btn,
+	.profile .cover .cover-buttons,
+	.library .aside-left .nav-pills > li,
+	.nav-list li a,
+	.dropdown-menu > li > a,
+	.sidebar > .nav > li {
+		border-radius: var(--vkui--size_border_radius--regular);
+	}
+
+	.nav-pills > li:hover,
+	.nav-pills-v2 .nav > li.active:hover,
+	.book-page .nav > li > a:focus,
+	.book-page .nav > li > a:hover,
+	.nav .open > a,
+	.nav .open > a:hover,
+	.nav .open > a:focus,
+	.comments .highlighted,
+	.comment header.is-pinned,
+	.comment-toggle-expand,
+	.sidebar:not(.search-sidebar) > .nav > li:hover {
+		background-color: var(--vkui--color_background_contrast_themed--hover);
+	}
+
+	.nav-tabs > li > a:hover {
+		border-color: var(--vkui--color_background_contrast_themed--hover);
+	}
+
+	.nav-pills-v2 .nav > li.active,
+	.book-page .nav-tabs > li.active > a,
+	.comment.is-new header,
+
+	.is-new .comment-toggle-expand,
+	.load-more-comments.is-new {
+		background-color: var(--vkui--color_background_contrast_themed);
+	}
+
+	.drop-content .dropdown-menu,
+	.cover-buttons .dropdown-menu,
+	.nav-profile .dropdown-menu,
+	.btn-group-dropdown .dropdown-menu,
+	.my-profile-avatar .avatar-edit-wrap .avatar-edit {
+		padding: var(--dropdown-action-sheet-padding);
+		background-color: var(--vkui--color_background_contrast_themed);
+		box-shadow: var(--vkui--elevation3);
+	}
+
+	.nav-pills-v2 .nav > li.active,
+	.book-page .nav-tabs > li.active > a {
+		box-shadow: var(--vkui--elevation2);
+	}
+
+	.nav-pills-v2 .nav > li.active,
+	.book-page .nav-tabs > li > a,
+	.book-page .nav-tabs > li.active > a {
+		border: 0;
+	}
+
+	.nav-tabs > li.active > a,
+	.comment header .label-brd,
+	.comment-toggle-expand {
+		color: inherit;
+	}
+
+	.profile-top-wrapper:after,
+	.friend-card .profile-avatar:after,
+	body.account-layout .aside:after,
+	body:not(.account-layout) .aside-profile.profile-card:after,
+	.nav-pills-v2 .nav > li > a.nav-link,
+	.nav-tabs > li > a,
+	.nav-pills-v2 .nav > li.active:before,
+	.book-page .nav-tabs > li.active > a:before,
+	.library .aside-left .nav-pills > li > a,
+	.sidebar > .nav > li > a,
+	.sidebar > .nav > li > span {
+		border-radius: inherit;
 	}
 
 	.text-muted {
@@ -1804,6 +1930,16 @@
 		margin-left: auto !important;
 	}
 
+	.search-sidebar.two-level > .nav > li.sidebar li.active > span,
+	.search-sidebar.two-level > .nav > li.sidebar .nav > li > a {
+		padding-left: 20px;
+		white-space: nowrap;
+	}
+
+	.search-sidebar.two-level .nav > li + li {
+		margin-top: 5px;
+	}
+
 	.main-section .panel:nth-child(3) .panel-heading .panel-actions {
 		color: var(--vkui--vkontakte_color_icon_outline_medium);
 		opacity: 0;
@@ -1826,7 +1962,8 @@
 		padding: var(--group-padding, 0);
 	}
 
-	.col-xs-3 .panel .panel-heading {
+	.panel .panel-heading,
+	.col-xs-9 .panel:not(.book-panel) {
 		border: 0;
 	}
 
@@ -1909,16 +2046,11 @@
 		right: 0;
 		bottom: 0;
 		border: var(--vkui--size_border--regular) solid var(--vkui--color_separator_primary);
-		border-radius: inherit;
 		pointer-events: none;
 		display: block;
 		height: auto;
 	}
 
-	/* 	body.account-layout .aside-profile.profile-card {
-		margin: 0 !important;
-	}
- */
 	.profile .cover-border {
 		z-index: 0;
 	}
@@ -1940,12 +2072,6 @@
 		margin-top: -25px;
 	}
 
-	.nav-pills-v2 .nav > li,
-	.nav-pills-v2 .nav > li.active,
-	.book-page .nav-tabs > li {
-		border-radius: var(--vkui--size_border_radius--regular);
-	}
-
 	.nav-pills-v2 .nav > li > a.nav-link,
 	.nav-pills-v2 .nav > li.active > a.nav-link,
 	.nav-tabs > li > a {
@@ -1961,52 +2087,9 @@
 		margin-left: 0;
 	}
 
-	.nav-pills > li:hover,
-	.nav-pills-v2 .nav > li.active:hover,
-	.book-page .nav > li > a:focus,
-	.book-page .nav > li > a:hover,
-	.nav .open > a,
-	.nav .open > a:hover,
-	.nav .open > a:focus,
-	.comments .highlighted,
-	.comment header.is-pinned,
-	.comment-toggle-expand {
-		background-color: var(--vkui--color_background_contrast_themed--hover);
-	}
-
-	.nav-tabs > li > a:hover {
-		border-color: var(--vkui--color_background_contrast_themed--hover);
-	}
-
-	.nav-pills-v2 .nav > li.active,
-	.book-page .nav-tabs > li.active > a,
-	.comment.is-new header,
-	.is-new .comment-toggle-expand,
-	.load-more-comments.is-new {
-		background-color: var(--vkui--color_background_contrast_themed);
-	}
-
-	.nav-pills-v2 .nav > li.active,
-	.book-page .nav-tabs > li.active > a {
-		box-shadow: var(--vkui--elevation2);
-	}
-
-	.nav-pills-v2 .nav > li.active,
-	.book-page .nav-tabs > li > a,
-	.book-page .nav-tabs > li.active > a {
-		border: 0;
-	}
-
-	.nav-tabs > li.active > a,
-	.comment header .label-brd,
-	.comment-toggle-expand {
-		color: inherit;
-	}
-
 	.nav-pills-v2 .nav > li.active:before,
 	.book-page .nav-tabs > li.active > a:before {
 		border: var(--vkui--size_border--regular) solid transparent;
-		border-radius: inherit;
 		bottom: 0;
 		content: "";
 		left: 0;
@@ -2023,7 +2106,6 @@
 		display: flex;
 		align-items: center;
 		height: 28px;
-		border-radius: inherit;
 	}
 
 	.nav-pills-v2 .nav > li > a.nav-link,
@@ -2107,11 +2189,16 @@
 
 	#search-results .panel-only-header {
 		border-bottom: 0;
+	}
+
+	.col-xs-9:not(.books-container) .panel.mb0:not(.book-panel),
+	#search-results .panel-only-header {
 		border-bottom-left-radius: 0;
 		border-bottom-right-radius: 0;
 	}
 
-	#search-results .panel-body {
+	#search-results .panel-body,
+	.feed-row:first-child {
 		border-top: 0;
 		border-top-left-radius: 0;
 		border-top-right-radius: 0;
@@ -2148,17 +2235,25 @@
 		border: 0;
 	}
 
-	.nav-profile .dropdown-menu,
-	.btn-group-dropdown .dropdown-menu,
 	.layout-fixed .wrapper .aside,
 	body.account-layout .aside-profile.profile-card {
-		border-top-left-radius: var(--vkui--size_border_radius_paper--regular) !important;
-		border-top-right-radius: var(--vkui--size_border_radius_paper--regular) !important;
+		border-top-left-radius: var(--vkui--size_border_radius_paper--regular);
+		border-top-right-radius: var(--vkui--size_border_radius_paper--regular);
 	}
 
+	body:not(.layout-responsive) .navbar .navbar-nav .open .dropdown-menu {
+		border-bottom-left-radius: var(--vkui--size_border_radius_paper--regular);
+		border-bottom-right-radius: var(--vkui--size_border_radius_paper--regular);
+	}
+
+	.tether-drop-content.dropdown-menu:not(.library-marks-dropdown) {
+		width: auto !important;
+	}
+
+	.tether-drop-content.dropdown-menu,
 	.dropdown-menu {
-		border-bottom-left-radius: var(--vkui--size_border_radius_paper--regular) !important;
-		border-bottom-right-radius: var(--vkui--size_border_radius_paper--regular) !important;
+		border-radius: var(--vkui--size_border_radius_paper--regular);
+		padding: var(--dropdown-action-sheet-padding);
 	}
 
 	.panel .panel-heading,
@@ -2259,6 +2354,13 @@
 	.nav-list li:hover a,
 	.nav-list li:active a {
 		color: inherit;
+	}
+
+	.dropdown-menu > li > a:hover,
+	.dropdown-menu > li > a:focus,
+	.nav-list li:hover a,
+	.nav-list li:active a,
+	.my-profile-avatar .avatar-edit .btn:hover {
 		background-color: var(--vkui--color_transparent--hover);
 	}
 
@@ -2266,7 +2368,8 @@
 		background-color: var(--vkui--color_separator_primary);
 	}
 
-	.works-dropdown .text-muted {
+	.works-dropdown .text-muted,
+	.dropdown-header {
 		color: var(--vkui--color_text_primary);
 	}
 
@@ -2279,10 +2382,6 @@
 		font-size: 18.5px;
 	}
 
-	.btn-nav-add {
-		margin: 9px;
-	}
-
 	.topnavbar .navbar-header .navbar-brand {
 		display: flex;
 		height: 100%;
@@ -2292,6 +2391,12 @@
 
 	.topnavbar .navbar-nav > li.nav-icon > a:hover {
 		background-color: var(--vkui--vkontakte_background_hover_alpha);
+	}
+
+	.library .aside-left .title {
+		padding: 10px 13px;
+		font-size: var(--page-block-header-font-size);
+		color: var(--vkui--color_text_primary);
 	}
 
 	.panel .panel-heading > .text-muted,
@@ -2311,7 +2416,8 @@
 		margin-right: 0 !important;
 	}
 
-	.panel .panel-heading {
+	.panel .panel-heading,
+	.library .aside-left .title {
 		line-height: var(--vkui--font_headline1--line_height--regular);
 	}
 
@@ -2413,33 +2519,32 @@
 		margin-top: calc(49px + var(--page-block-offset, 15px))
 	}
 
-	.feed-row {
+	.feed-row,
+	.col-xs-9 .panel:not(.book-panel) {
 		box-shadow: var(--page-block-shadow);
 	}
 
-	.feed-row:first-child {
+	/* 	.feed-row:first-child {
 		margin-top: 14px;
-	}
-
+	} */
 	.comment:not(.c-reply):hover,
 	.feed-row.comment-wrapper .comment:hover {
 		background-color: transparent;
 	}
 
 	.my-profile-avatar .avatar-edit-wrap {
+		overflow: initial;
 		margin-top: 8px;
+		opacity: 0;
+		transform-origin: top left;
+		transform: scale(0);
+		transition: transform .1s ease-out, opacity .1s ease-out;
+		height: auto;
+		width: auto;
 	}
 
-	.my-profile-avatar .avatar-edit-wrap .avatar-edit {
-		margin-top: 0;
-		opacity: 1;
-		height: 0;
-		width: 0;
-		overflow: hidden;
-	}
-
-	[image-zoom]:hover + .avatar-edit-wrap:before,
-	.avatar-edit-wrap:hover:before {
+	.my-profile-avatar .avatar-edit-wrap:before {
+		--vkui_internal--popover_safe_zone_padding: 12px;
 		content: "";
 		position: absolute;
 		bottom: calc(var(--vkui_internal--popover_safe_zone_padding)* -1);
@@ -2448,25 +2553,56 @@
 		top: -16px;
 	}
 
-	.my-profile-avatar:hover .avatar-edit {
-		opacity: 0;
+	[image-zoom]:hover + .avatar-edit-wrap,
+	.avatar-edit-wrap:hover {
+		opacity: 1;
+		transform: scale(1);
+	}
+
+	.my-profile-avatar .avatar-edit-wrap .avatar-edit {
+		margin-top: 0;
+		opacity: 1;
+		position: relative;
+	}
+
+	.my-profile-avatar:hover .avatar-edit-wrap .avatar-edit {
 		margin-top: 0;
 	}
 
-	[image-zoom]:hover + .avatar-edit-wrap .avatar-edit,
-	.avatar-edit-wrap:hover .avatar-edit {
+	.my-profile-avatar .avatar-edit .btn {
 		opacity: 1;
-		filter: none;
-		height: 58px;
-		width: 160px;
+		padding: 0 8px;
+		min-height: 34px;
+		display: flex;
+		align-items: center;
+		font-size: var(--vkui--font_text--font_size--compact);
+		line-height: var(--vkui--font_text--line_height--compact);
 	}
 
-	/* 	.nav-pills > li + li,
-	.nav-tabs > li + li {
-		margin: 0;
-	} */
+	.my-profile-avatar .avatar-edit .btn i {
+		margin-right: 0 !important;
+		font-size: 16px;
+		width: 26px;
+		color: var(--vkui--color_icon_accent);
+	}
+
+	.my-profile-avatar .avatar-edit .btn i.icon-cross {
+		padding-left: 2px;
+	}
+
+	.my-profile-avatar .avatar-edit .btn i.icon-cross:before {
+		content: ""
+	}
+
+	.my-profile-avatar .avatar-edit .btn i.icon-cross,
+	.text-danger {
+		color: var(--vkui--color_icon_negative) !important;
+	}
+
 	.library .aside-left .nav-pills > li.active,
-	.library .aside-left .nav-pills > li > a {
+	.library .aside-left .nav-pills > li > a,
+	.sidebar > .nav > li.active,
+	.sidebar > .nav > li > span {
 		background: transparent;
 	}
 
@@ -2482,12 +2618,15 @@
 		line-height: var(--vkui--font_footnote--line_height--regular);
 	}
 
-	.library .aside-left .nav-pills > li.active > a {
+	.library .aside-left .nav-pills > li.active > a,
+	.sidebar li:not(.sidebar):not(.sidebar-nav):hover,
+	.sidebar > .nav > li.active {
 		background: var(--vkui--vkontakte_background_hover_alpha);
 	}
 
 	.library .aside-left .nav-pills > li > a,
-	.library .aside-left .nav-pills > li.active > a {
+	.library .aside-left .nav-pills > li.active > a,
+	.sidebar > .nav > li {
 		border: 0;
 	}
 
@@ -2495,13 +2634,14 @@
 	.library .aside-left .nav-pills > li.active > a,
 	.library .aside-left .nav-pills > li > a:hover,
 	.library .aside-left .nav-pills > li > a:focus,
-	.feed header .title > a {
+	.feed header .title > a,
+	.sidebar > .nav > li.active > span,
+	.sidebar > .nav > li > a,
+	.sidebar > .nav > li > a:hover,
+	.sidebar > .nav > li > a:focus {
 		color: var(--vkui--color_text_primary);
 	}
 
-	/* 	.library .book-cover .cover-image img {
-		height: 200px;
-	} */
 	.search-sidebar {
 		border-left: 1px solid var(--vkui--color_separator_primary);
 		border-right: 1px solid var(--vkui--color_separator_primary);
@@ -2526,4 +2666,8 @@
 	.qq-uploader {
 		background-color: transparent;
 	}
+
+	/* 	.library .book-cover .cover-image img {
+		height: 200px;
+	} */
 }
