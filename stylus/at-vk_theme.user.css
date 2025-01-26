@@ -1,7 +1,7 @@
 /* ==UserStyle==
 @name           AT - VK тема
 @namespace      Hallucinations
-@version        1.0.5
+@version        1.0.6
 @description    VK тема для author.today
 @homepageURL    https://github.com/lijspoop/Hallucinations/
 @license        MIT
@@ -1987,6 +1987,7 @@
 	}
 
 	.nav:not(.nav-pills,
+	.nav-tabs,
 	.navbar-nav) > li + li {
 		margin-top: 5px;
 	}
@@ -2754,9 +2755,17 @@
 		background-color: transparent;
 	}
 
-	.aside-profile-stats .stats-sep {
+	.profile .aside-profile-stats .stats-sep {
 		position: absolute;
 		left: 0;
+	}
+
+	.profile .aside-profile-stats .col-xs-6:first-child {
+		padding-right: 15px;
+	}
+
+	.profile .aside-profile-stats .col-xs-6:last-child {
+		padding-left: 15px;
 	}
 
 	.fr-box.fr-basic .fr-element {
@@ -2836,8 +2845,6 @@
 	.c-radio input[type=checkbox]:checked + span,
 	.c-radio input[type=radio]:checked + span {
 		border-width: 1px;
-		border-color: #71aaeb;
-		background-color: #71aaeb;
 		border-color: transparent;
 		background-color: transparent;
 		background-image: url(data:image/svg+xml;charset=utf-8,%3Csvg%20width%3D%2220%22%20height%3D%2220%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%3Cpath%20fill-rule%3D%22evenodd%22%20clip-rule%3D%22evenodd%22%20d%3D%22M2.44%204.18C2%205.04%202%206.16%202%208.4v3.2c0%202.24%200%203.36.44%204.22a4%204%200%20001.74%201.74c.86.44%201.98.44%204.22.44h3.2c2.24%200%203.36%200%204.22-.44a4%204%200%20001.74-1.74c.44-.86.44-1.98.44-4.22V8.4c0-2.24%200-3.36-.44-4.22a4%204%200%2000-1.74-1.74C14.96%202%2013.84%202%2011.6%202H8.4c-2.24%200-3.36%200-4.22.44a4%204%200%2000-1.74%201.74zm12.2%203.8a.9.9%200%2010-1.28-1.27L8.7%2011.38%206.64%209.33a.9.9%200%2000-1.28%201.27l2.7%202.69a.9.9%200%20001.27%200l5.3-5.3z%22%20fill%3D%22%2371aaeb%22%2F%3E%3C%2Fsvg%3E);
