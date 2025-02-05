@@ -2891,9 +2891,10 @@
 	.panel-toggle .panel-title > a[data-toggle]:hover,
 	.comment-action,
 	a,
-	.work-series .title > a,
 	a:hover,
-	a:focus {
+	a:focus,
+	.work-series .title > a,
+	.comment-action:hover {
 		color: var(--vkui_internal--link-color, var(--vkui--color_text_link));
 	}
 
