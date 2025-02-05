@@ -1,7 +1,7 @@
 /* ==UserStyle==
 @name           AT - VK тема
 @namespace      Hallucinations
-@version        1.0.8
+@version        1.0.9
 @description    VK тема для author.today
 @homepageURL    https://github.com/lijspoop/Hallucinations/
 @license        MIT
@@ -991,7 +991,7 @@
 		--vkui--color_background_accent: #71aaeb;
 		--vkui--color_background_accent--hover: #77adec;
 		--vkui--color_background_accent--active: #7cb1ed;
-		--vkui--color_background_accent_themed: #e1e3e6;
+		--vkui--color_background_accent_themed: 225, 227, 230;
 		--vkui--color_background_accent_themed--hover: #d8dbdf;
 		--vkui--color_background_accent_themed--active: #cfd2d8;
 		--vkui--color_background_accent_themed_alpha: rgba(255, 255, 255, 0.2);
@@ -1585,17 +1585,18 @@
 	}
 
 	.btn:not(.btn-mark-dropdown,
+	.btn-only-icon,
 	.btn-tether-drop,
-	.dropdown-toggle,
-	.btn-in-library) i:not(.icon-dice,
+	.dropdown-toggle) > i:not(.icon-dice,
 	.icon-eye),
 	.nav-link i {
 		margin-right: 5px;
 	}
 
-	library-button i,
+	.btn-only-icon i,
+	library-button :not(.btn-in-library) > i,
 	.btn-mark-dropdown i {
-		margin: 0 !important;
+		margin-right: 0;
 	}
 
 	.btn,
@@ -1667,9 +1668,9 @@
 	body.scroll-mode.brightness-2 #reader .pager a,
 	.btn-toggle-action.btn-success .hover-content,
 	.btn-toggle-action.btn-primary .hover-content {
-		background-color: var(--vkui--color_background_accent_themed);
+		background-color: rgb(var(--vkui--color_background_accent_themed));
 		color: var(--vkui--color_text_contrast_themed);
-		border-color: var(--vkui--color_background_accent_themed);
+		border-color: rgb(var(--vkui--color_background_accent_themed));
 	}
 
 	.navbar-nav .btn-transparent,
@@ -1700,7 +1701,6 @@
 		color: var(--vkui--color_text_primary);
 	}
 
-
 	.pagination > .active > a,
 	.pagination > .active > a:hover {
 		--color: #5b5b5b;
@@ -1710,6 +1710,10 @@
 
 	g > text {
 		fill: var(--vkui--color_text_primary);
+	}
+
+	.btn-pulse {
+		box-shadow: 0 0 0 0 rgba(var(--vkui--color_background_accent_themed), .5);
 	}
 
 	/* 	.btn-dropdown,
@@ -1769,7 +1773,7 @@
 		display: flex;
 		padding: 0 !important;
 	} */
-	.btn-facebook {
+	/* 	.btn-facebook {
 		overflow: hidden;
 	}
 
@@ -1814,6 +1818,13 @@
 	.post.full-post .post-buttons .btn-vk > i {
 		left: 4px;
 		top: 12px;
+	} */
+	.btn-google,
+	.btn-yandex,
+	.btn-facebook,
+	.btn-vk,
+	.btn-twitter {
+		margin-right: 10px;
 	}
 
 	.rich-content {
@@ -1853,7 +1864,13 @@
 	.layout-fixed .wrapper .aside,
 	.drop-element.drop-theme-arrows.drop-element-attached-bottom.drop-element-attached-center.drop-view-comment .drop-content,
 	.profile .cover .cover-buttons,
-	.section-android-bottom {
+	.section-android-bottom,
+	.about,
+	.how-to-talk,
+	.write-us,
+	.bustler,
+	.specialists,
+	.questions {
 		background-color: var(--vkui--color_background_content);
 	}
 
@@ -1989,7 +2006,8 @@
 	.disputed-item,
 	.post.full-post .post-buttons,
 	.crossed-text,
-	.genre-s-footer {
+	.genre-s-footer,
+	.colored-icon-email {
 		color: var(--vkui--color_text_secondary);
 	}
 
@@ -2059,8 +2077,10 @@
 	.comment header.is-pinned,
 	.comment-toggle-expand,
 	.sidebar:not(.search-sidebar) > .nav > li:hover,
-	.sumo-select > .options-wrapper > .options > li:hover,
+	.select2-container--default .select2-results__option--highlighted[aria-selected],
+	.sumo-select .select-all:hover,
 	.sumo-select .reset-all:hover,
+	.sumo-select > .options-wrapper > .options > li:hover,
 	.sumo-select > .options-wrapper.multiple > .multicontrols > p:hover {
 		background-color: var(--vkui--color_background_contrast_themed--hover);
 	}
@@ -2080,9 +2100,13 @@
 
 	.drop-content .dropdown-menu,
 	.cover-buttons .dropdown-menu,
-	.nav-profile .dropdown-menu,
 	.my-profile-avatar .avatar-edit-wrap .avatar-edit {
 		padding: var(--dropdown-action-sheet-padding);
+		background-color: var(--vkui--color_background_contrast_themed);
+		box-shadow: var(--vkui--elevation3);
+	}
+
+	.nav-profile .dropdown-menu {
 		background-color: var(--vkui--color_background_contrast_themed);
 		box-shadow: var(--vkui--elevation3);
 	}
@@ -2403,6 +2427,7 @@
 		border: var(--vkui--size_border--regular) solid var(--vkui--color_image_border_alpha);
 	}
 
+	/* 	.dropdown-menu, */
 	.col-xs-3.aside-left .panel .panel-body:has( .filter-list),
 	.friend-card .profile-avatar img {
 		padding: 0;
@@ -2739,12 +2764,22 @@
 		border-bottom-color: var(--black_alpha72);
 	}
 
+	.hint-left:before {
+		border-left-color: var(--black_alpha72);
+	}
+
+	.hint-right:before {
+		border-right-color: var(--black_alpha72);
+	}
+
 	.hint-top:after,
 	.hint-top-left:after,
 	.hint-top-right:after,
 	.hint-bottom:after,
 	.hint-bottom-left:after,
-	.hint-bottom-right:after {
+	.hint-bottom-right:after,
+	.hint-left:after,
+	.hint-right:after {
 		background-color: var(--black_alpha72);
 	}
 
@@ -2862,6 +2897,26 @@
 		color: var(--vkui_internal--link-color, var(--vkui--color_text_link));
 	}
 
+	.btn-action-link + .dropdown-menu {
+		padding: 0;
+		border: 0;
+		border-radius: 8px;
+		background-color: var(--vkui--color_background_content);
+		box-shadow: var(--vkui--elevation3);
+		overflow: hidden;
+	}
+
+	.btn-action-link + .dropdown-menu > li > a {
+		padding: 8px 12px;
+	}
+
+	.btn-action-link + .dropdown-menu > li > a {
+		font-size: 13px;
+		font-weight: 400;
+		-webkit-font-smoothing: subpixel-antialiased;
+		-moz-osx-font-smoothing: auto;
+		line-height: 16px;
+	}
 
 	.comment-action:hover {
 		text-decoration: underline;
@@ -3095,7 +3150,7 @@
 	select.form-control,
 	.sumo-select > .caption-container,
 	.select2-container--default .select2-selection--multiple {
-		height: 30px;
+		height: 30px !important;
 		border-radius: var(--vkui--size_border_radius--regular);
 	}
 
@@ -3113,10 +3168,19 @@
 	.select2-dropdown,
 	.sumo-select > .options-wrapper,
 	.sumo-select > .options-wrapper > .multicontrols,
-	.sumo-select .reset-all {
+	.sumo-select .reset-all,
+	.sumo-select .select-all {
 		background-color: var(--vkui--color_field_background);
 		border-color: var(--vkui--color_field_border_alpha);
 		color: var(--vkui--color_text_primary);
+	}
+
+	.sumo-select > [name="genre"] ~ .options-wrapper {
+		top: -295px;
+	}
+
+	.sumo-select > [name="genre"] ~ .options-wrapper.open {
+		top: -290px;
 	}
 
 	.form-control[disabled],
@@ -3140,7 +3204,6 @@
 
 	.c-checkbox span,
 	.c-radio span {
-		margin-top: 0;
 		border-color: transparent;
 		width: 16px;
 		height: 16px;
