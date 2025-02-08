@@ -1,7 +1,7 @@
 /* ==UserStyle==
 @name           AT - VK тема
 @namespace      Hallucinations
-@version        1.0.9
+@version        1.0.10
 @description    VK тема для author.today
 @homepageURL    https://github.com/lijspoop/Hallucinations/
 @license        MIT
@@ -1588,7 +1588,8 @@
 	.btn-only-icon,
 	.btn-tether-drop,
 	.dropdown-toggle) > i:not(.icon-dice,
-	.icon-eye),
+	.icon-eye,
+	.icon-plus),
 	.nav-link i {
 		margin-right: 5px;
 	}
@@ -1636,6 +1637,10 @@
 		padding: 0 var(--vkui--size_button_base_small_padding_horizontal--regular);
 	}
 
+	.btn-icon {
+		padding: 0 !important;
+	}
+
 	.btn-mark-dropdown {
 		height: auto;
 	}
@@ -1668,6 +1673,22 @@
 	body.scroll-mode.brightness-2 #reader .pager a,
 	.btn-toggle-action.btn-success .hover-content,
 	.btn-toggle-action.btn-primary .hover-content {
+		background-color: rgb(var(--vkui--color_background_accent_themed));
+		color: var(--vkui--color_text_contrast_themed);
+		border-color: rgb(var(--vkui--color_background_accent_themed));
+	}
+
+	.btn-primary.disabled:hover,
+	.btn-primary.disabled:focus,
+	.btn-primary.disabled.focus,
+	.btn-primary[disabled]:hover,
+	.btn-primary[disabled]:focus,
+	.btn-primary[disabled].focus,
+	fieldset[disabled] .btn-primary:hover,
+	fieldset[disabled] .btn-primary:focus,
+	fieldset[disabled] .btn-primary.focus,
+	.btn-primary.disabled:active:hover,
+	.btn-primary[disabled]:active:hover {
 		background-color: rgb(var(--vkui--color_background_accent_themed));
 		color: var(--vkui--color_text_contrast_themed);
 		border-color: rgb(var(--vkui--color_background_accent_themed));
@@ -1925,7 +1946,6 @@
 	.notification-header,
 	.brightness-2 .contents ul,
 	.brightness-2 .contents ul li,
-	.modal .modal-content,
 	.modal .modal-header,
 	.pagination > li > a,
 	.pagination > li > span,
@@ -1948,6 +1968,7 @@
 	.library .aside-left .nav-pills > li.divider,
 	.fr-separator,
 	.book-review-info,
+	.bookcard-header,
 	.drop-element.drop-theme-arrows .drop-content,
 	.pagination > .disabled > span,
 	.pagination > .disabled > span:hover,
@@ -2027,7 +2048,9 @@
 	.drop-element.drop-theme-arrows.drop-element-attached-bottom.drop-element-attached-center.drop-view-comment .drop-content .comment:hover,
 	.disputed-item:hover,
 	.post.full-post .post-buttons,
-	.book-filter-form {
+	.book-filter-form,
+	.book-details-row:hover .col-1,
+	.book-details-row:hover .col-2 {
 		background-color: transparent;
 	}
 
@@ -2184,7 +2207,8 @@
 
 	.nav:not(.nav-pills,
 	.nav-tabs,
-	.navbar-nav) > li + li {
+	.navbar-nav) > li + li,
+	#tab-stats .row.book-details-row {
 		margin-top: 5px;
 	}
 
@@ -2684,14 +2708,63 @@
 	.dropdown-menu,
 	.list-group-item,
 	.brightness-2 .drop.reader-menu,
-	.modal-content {
-		background-color: var(--vkui--color_background_modal);
-		border: 1px solid var(--vkui--color_separator_primary);
+	.modal .modal-content {
+		background-color: var(--vkui--color_background_content);
+		border: 0;
+	}
+
+	.modal-backdrop.in {
+		opacity: .8;
+	}
+
+	.modal .modal-content {
+		box-shadow: none;
 	}
 
 	.modal .modal-header {
-		background-color: var(--vkui--color_background_modal);
+		padding: 0 24px;
+		display: flex;
+		align-items: center;
+		background-color: var(--vkui--color_background_secondary);
+		border: 1px solid var(--vkui--color_separator_primary);
+		height: 50px;
 	}
+
+	.modal .modal-header {
+		font-size: 1em;
+		line-height: 14px;
+	}
+
+	.modal .modal-header .modal-title {
+		font-family: var(--palette-vk-font);
+		font-style: normal;
+		font-weight: 500;
+		-webkit-font-smoothing: subpixel-antialiased;
+		-moz-osx-font-smoothing: auto;
+		font-size: 15px;
+		letter-spacing: -.007em;
+		height: 50px;
+		line-height: 50px;
+	}
+
+	.modal .modal-header button.close {
+		padding: 15px 20px 15px 15px;
+		width: auto;
+		opacity: 75%;
+		color: transparent;
+		text-shadow: none;
+	}
+
+	.modal .modal-header button.close:hover {
+		opacity: 1;
+	}
+
+	.modal .modal-header button.close span {
+		background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjQuNTAwNjYgNC40ODEzIDExLjAyIDExLjA0Ij4KCTxwYXRoIGQ9Ik00LjcyIDQuNzJjLjMtLjMuNzctLjMgMS4wNiAwTDEwIDguOTRsNC4yMi00LjIyYS43NS43NSAwIDEgMSAxLjA2IDEuMDZMMTEuMDYgMTBsNC4yMiA0LjIyYS43NS43NSAwIDEgMS0xLjA2IDEuMDZMMTAgMTEuMDZsLTQuMjIgNC4yMmEuNzUuNzUgMCAwIDEtMS4wNi0xLjA2TDguOTQgMTAgNC43MiA1Ljc4YS43NS43NSAwIDAgMSAwLTEuMDZ6IiBmaWxsPSIjOTM5MzkzIi8+Cjwvc3ZnPg==);
+		background-repeat: no-repeat;
+		background-position-y: center;
+	}
+
 
 	.dropdown-menu::before,
 	.dropdown-menu::after {
@@ -3282,5 +3355,18 @@
 		background-color: transparent;
 		color: var(--vkui_internal--link-color, var(--vkui--color_text_link));
 		text-decoration: underline;
+	}
+
+	.bookcard-header {
+		top: 0;
+		padding: 4px 10px;
+		border-radius: 0 0 4px 4px;
+	}
+
+	.my-profile .cover-buttons {
+		top: 20px;
+		right: 20px !important;
+		bottom: auto !important;
+		background-color: transparent !important;
 	}
 }
