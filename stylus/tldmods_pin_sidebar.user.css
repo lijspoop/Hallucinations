@@ -62,7 +62,7 @@
 		margin-left: var(--sidebar-width);
 	}
 
-  /* correcting the cursor when hovering over the dependency button */
+	/* correcting the cursor when hovering over the dependency button */
 
 	.modlist .modlist-wrapper .mod-item .mod-links .mod-link.mod-dependencies-download {
 		position: relative;
