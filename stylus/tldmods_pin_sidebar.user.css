@@ -1,0 +1,81 @@
+/* ==UserStyle==
+@name           [TLDMods] pin the sidebar
+@namespace      Hallucinations
+@version        1.0.0
+@description    pinning the sidebar when scrolling through the list of mods
+@homepageURL    https://github.com/lijspoop/Hallucinations/
+@license        BSD-2-Clause
+@author         lijspoop
+==/UserStyle== */
+@-moz-document domain("tldmods.com") {
+	:root {
+		--topbar-height: 70px;
+		--sidebar-width: 350px;
+	}
+
+	.main {
+		position: absolute;
+		top: 0;
+		bottom: 0;
+		left: 0;
+		right: 0;
+	}
+
+	.topbar {
+		height: var(--topbar-height);
+	}
+
+	.topbar .topbar-inner {
+		height: 100%;
+	}
+
+	.topbar .topbar-inner .logo h1 {
+		margin: 0;
+	}
+
+	.main-content {
+		padding-top: 0;
+		height: 100%;
+	}
+
+	.sidebar {
+		position: fixed;
+		padding: 0;
+		top: var(--topbar-height);
+		bottom: 0;
+		overflow: hidden;
+		overflow-y: auto;
+	}
+
+	.sidebar-wrapper {
+		padding: 20px 30px;
+		width: var(--sidebar-width, 350px);
+		position: initial !important;
+	}
+
+	.sidebar .filter-block.filter-actions {
+		margin-bottom: 20px;
+	}
+
+	.modlist {
+		margin-top: var(--topbar-height);
+		margin-left: var(--sidebar-width);
+	}
+
+  /* correcting the cursor when hovering over the dependency button */
+
+	.modlist .modlist-wrapper .mod-item .mod-links .mod-link.mod-dependencies-download {
+		position: relative;
+	}
+
+	.modlist .modlist-wrapper .mod-item .mod-links .mod-link.mod-dependencies-download::after {
+		content: '';
+		display: block;
+		width: 100%;
+		height: 100%;
+		position: absolute;
+		top: 0;
+		left: 0;
+		cursor: pointer;
+	}
+}
