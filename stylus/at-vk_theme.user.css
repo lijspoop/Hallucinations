@@ -1,7 +1,7 @@
 /* ==UserStyle==
 @name           AT - VK тема
 @namespace      Hallucinations
-@version        1.0.11
+@version        1.0.14
 @description    VK тема для author.today
 @homepageURL    https://github.com/lijspoop/Hallucinations
 @license        MIT
@@ -1779,7 +1779,17 @@
         background-color: var(--vkui--vkontakte_background_hover_alpha);
     }
 
-    library-button button,
+    /*     library-button button {
+        display: flex !important;
+        align-items: center;
+    }
+    .icon-2-clock:before {
+        margin-top: 2px;
+    } */
+    .btn-in-library:not(:hover) > i:before {
+        color: inherit;
+    }
+
     mark-button button {
         display: flex !important;
         justify-content: center;
@@ -1911,6 +1921,10 @@
         background-color: var(--convoHistoryBackgroundColor);
     }
 
+    .authorization {
+        background-color: unset;
+    }
+
     .panel,
     .panel .panel-heading,
     .main-info .aside-profile-stats,
@@ -1956,13 +1970,22 @@
     .pagination > .disabled > span:focus,
     .pagination > .disabled > a,
     .pagination > .disabled > a:hover,
-    .pagination > .disabled > a:focus {
+    .pagination > .disabled > a:focus,
+    .authorization .authorization-social-title:before {
         border-color: var(--vkui--color_separator_primary);
     }
 
     .drop-element.drop-theme-arrows.drop-element-attached-bottom.drop-element-attached-center.drop-view-comment .drop-content:before,
     .drop-element.drop-theme-arrows.drop-element-attached-bottom.drop-element-attached-center.drop-view-comment .drop-content:after {
         border-top-color: var(--vkui--color_separator_primary) !important;
+    }
+
+    .drop-element.drop-theme-arrows.drop-element-attached-top.drop-element-attached-center .drop-content:before {
+        border-bottom-color: var(--vkui--color_separator_primary);
+    }
+
+    .drop-element.drop-theme-arrows.drop-element-attached-left.drop-element-attached-middle .drop-content:before {
+        border-right-color: var(--vkui--color_separator_primary);
     }
 
     .library .aside-left .nav-pills > li.divider,
@@ -1977,10 +2000,6 @@
     .pagination > .disabled > a:hover,
     .pagination > .disabled > a:focus {
         background-color: var(--vkui--color_separator_primary);
-    }
-
-    .drop-element.drop-theme-arrows.drop-element-attached-left.drop-element-attached-middle .drop-content:before {
-        border-right-color: var(--vkui--color_separator_primary);
     }
 
     .friend-card .profile-name,
@@ -2210,6 +2229,11 @@
     .navbar-nav) > li + li,
     #tab-stats .row.book-details-row {
         margin-top: 5px;
+    }
+
+    .btn-with-icon.btn-sm i,
+    .btn-only-icon.btn-sm i {
+        margin-top: -8px;
     }
 
     .navbar-left {
@@ -2554,7 +2578,11 @@
     .book-review-info,
     .my-profile-avatar .avatar-edit,
     .dropdown-menu,
-    .drop-element.drop-theme-arrows .drop-content {
+    .drop-element.drop-theme-arrows .drop-content,
+    .f-book-container,
+    .f-book-container .bg-image-wrapper,
+    .aside-banner,
+    .aside-banner img {
         border-radius: var(--vkui--size_border_radius_paper--regular);
     }
 
@@ -2714,13 +2742,25 @@
     }
 
     body:not(.layout-responsive) .navbar .navbar-nav .open .dropdown-menu,
-    .dropdown-menu,
     .list-group-item,
     .brightness-2 .drop.reader-menu,
     .modal .modal-content {
         background-color: var(--vkui--color_background_modal);
         border: 0;
         overflow: hidden;
+    }
+
+    .dropdown-menu:not(.library-marks-dropdown) {
+        background-color: var(--vkui--color_background_modal);
+        border: 0;
+    }
+
+    .authorization .authorization-social-title-text {
+        background-color: var(--vkui--color_background_modal);
+    }
+
+    .input-icon {
+        top: 7px;
     }
 
     .modal-backdrop.in {
@@ -3287,6 +3327,10 @@
         border-color: var(--vkui--color_field_border_alpha);
     }
 
+    .c-checkbox span {
+        margin-top: 0;
+    }
+
     .c-checkbox span,
     .c-radio span {
         border-color: transparent;
@@ -3327,6 +3371,10 @@
     .filter-list .filter-item .count {
         order: 1;
         margin-left: auto;
+    }
+
+    .book-cover .ribbon {
+        z-index: 3;
     }
 
     /* 	.library .book-cover .cover-image img {
