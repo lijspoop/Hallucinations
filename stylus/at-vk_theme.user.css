@@ -1,7 +1,7 @@
 /* ==UserStyle==
 @name           AT - VK тема
 @namespace      Hallucinations
-@version        1.0.14
+@version        1.0.15
 @description    VK тема для author.today
 @homepageURL    https://github.com/lijspoop/Hallucinations
 @license        MIT
@@ -1589,11 +1589,13 @@
     .btn-tether-drop,
     .dropdown-toggle) > i:not(.icon-dice,
     .icon-eye,
-    .icon-plus),
+    .icon-plus,
+    .icon-bell-o),
     .nav-link i {
         margin-right: 5px;
     }
 
+    .panel-actions .btn,
     .btn-only-icon i,
     library-button :not(.btn-in-library) > i,
     .btn-mark-dropdown i {
@@ -2002,6 +2004,10 @@
         background-color: var(--vkui--color_separator_primary);
     }
 
+    .feed-row.is-new .book-review-info {
+        background-color: var(--vkui--color_background_secondary);
+    }
+
     .friend-card .profile-name,
     .bookcard-footer .bookcard-title a,
     .book-page .book-title,
@@ -2025,6 +2031,7 @@
         color: var(--vkui--color_text_primary);
     }
 
+    .book-stats,
     .bookcard-footer .bookcard-authors a,
     .nav-pills-v2 .nav > li > a.nav-link,
     .nav-pills-v2 .nav > li > a.nav-link:hover,
@@ -3011,6 +3018,7 @@
         top: calc(50% + 2.5px);
     }
 
+    .book-stats a,
     .btn-action-link:hover,
     .panel-toggle .panel-title > a[data-toggle]:hover,
     .comment-action,
@@ -3109,12 +3117,6 @@
     .avatar-edit-wrap:hover {
         opacity: 1;
         transform: scale(1);
-    }
-
-    .my-profile-avatar .avatar-edit-wrap .avatar-edit {
-        margin-top: 0;
-        opacity: 1;
-        position: relative;
     }
 
     .my-profile-avatar:hover .avatar-edit-wrap .avatar-edit,
@@ -3427,5 +3429,22 @@
         right: 20px !important;
         bottom: auto !important;
         background-color: transparent !important;
+    }
+
+    .searched-item {
+        background: blueviolet;
+        color: #fff;
+    }
+}
+
+@-moz-document regexp("https?://author\\.today/u/.*") {
+    .my-profile-avatar .avatar-edit-wrap .avatar-edit {
+        margin-top: 0;
+        opacity: 1;
+        position: relative;
+    }
+
+    .sumo-select .reset-all label {
+        margin-bottom: 0;
     }
 }
